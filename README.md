@@ -12,28 +12,29 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 ## SUMÁRIO
 
-- [Habilidades](#habilidades)
+- [Boas vindas ao repositório do projeto de Carrinho de Compras!](#boas-vindas-ao-repositório-do-projeto-de-carrinho-de-compras)
+  - [SUMÁRIO](#sumário)
+  - [Habilidades](#habilidades)
 - [Entregáveis](#entregáveis)
   - [O que será desenvolvido](#o-que-será-desenvolvido)
     - [Protótipo do projeto](#protótipo-do-projeto)
 - [Data de entrega](#data-de-entrega)
 - [Desenvolvimento](#desenvolvimento)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
+  - [Antes de começar a desenvolver:](#antes-de-começar-a-desenvolver)
   - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-  - [ESLint e Stylelint](#eslint-e-stylelint)
-  - [Cypress](#cypress)
+    - [ESLint e Stylelint](#eslint-e-stylelint)
+    - [Cypress](#cypress)
 - [Requisitos do projeto](#requisitos-do-projeto)
   - [API Shopping Cart](#api-shopping-cart)
   - [Observações técnicas](#observações-técnicas)
-  - [1. Crie uma listagem de produtos](#1-crie-uma-listagem-de-produtos)
-  - [2. Adicione o produto ao carrinho de compras](#2-adicione-o-produto-ao-carrinho-de-compras)
-  - [3. Remova o item do carrinho de compras ao clicar nele](#3-remova-o-item-do-carrinho-de-compras-ao-clicar-nele)
-  - [4. Carregue o carrinho de compras através do **LocalStorage** ao iniciar a página](#4-carregue-o-carrinho-de-compras-através-do-LocalStorage-ao-iniciar-a-página)
-  - [5. Some o valor total dos itens do carrinho de compras](#5-some-o-valor-total-dos-itens-do-carrinho-de-compras)
-  - [6. Crie um botão para limpar carrinho de compras](#6-crie-um-botão-para-limpar-carrinho-de-compras)
-  - [7. Adicione um texto de "loading" durante uma requisição à API](#7-adicione-um-texto-de-loading-durante-uma-requisição-à-api)
-- [Depois de terminar o desenvolvimento (opcional)](#depois-de-terminar-o-desenvolvimento-opcional)
-- [Revisando um Pull Request](#revisando-um-pull-request)
+    - [1. Crie uma listagem de produtos](#1-crie-uma-listagem-de-produtos)
+    - [3. Remova o item do carrinho de compras ao clicar nele](#3-remova-o-item-do-carrinho-de-compras-ao-clicar-nele)
+    - [4. Carregue o carrinho de compras através do **LocalStorage** ao iniciar a página](#4-carregue-o-carrinho-de-compras-através-do-localstorage-ao-iniciar-a-página)
+    - [5. Some o valor total dos itens do carrinho de compras](#5-some-o-valor-total-dos-itens-do-carrinho-de-compras)
+    - [6. Crie um botão para limpar carrinho de compras](#6-crie-um-botão-para-limpar-carrinho-de-compras)
+    - [7. Adicione um texto de "loading" durante uma requisição à API](#7-adicione-um-texto-de-loading-durante-uma-requisição-à-api)
+  - [Depois de terminar o desenvolvimento](#depois-de-terminar-o-desenvolvimento)
+  - [Revisando um pull request](#revisando-um-pull-request)
 - [Avisos finais](#avisos-finais)
 
 ---
@@ -214,13 +215,13 @@ Você deve criar uma listagem de produtos que devem ser consultados através da 
 
 Você deve utilizar o _endpoint_:
 ```javascript
-"https://api.mercadolibre.com/sites/MLB/search?q=$QUERY"
+"**https://api.mercadolibre.com/sites/MLB/search?q=$QUERY**"
 ```
 onde `$QUERY` deve ser o valor da sua busca. Para este trabalho, a busca deve ser **obrigatóriamente** o termo `computador`.
 
 O retorno desse _endpoint_ será algo no formato `json`. Por exemplo, se for pesquisado "computador":
-```json
-{
+
+{```json
     "site_id": "MLB",
     "query": "computador",
     "paging": {
@@ -236,7 +237,6 @@ O retorno desse _endpoint_ será algo no formato `json`. Por exemplo, se for pes
             "title": "Processador Intel Core I5-9400f 6 Núcleos 128 Gb",
             "seller": {
                 "id": 385471334,
-                "permalink": null,
                 "power_seller_status": null,
                 "car_dealer": false,
                 "real_estate_agency": false,
