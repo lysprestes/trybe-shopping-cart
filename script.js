@@ -1,5 +1,6 @@
 let items; // criando variavel global para selecionar a classe 'items' do html
-const URL = 'https://api.mercadolibre.com/'; // URL base do API
+let cartItems; // criando variavel global para selecionar a classe 'cart__items' do html
+const URL = 'https://api.mercadolibre.com/'; // URL base do API, facilitando o uso da URL
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -19,10 +20,39 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+// criando um objeto com as funcoes de local storage. A partir de agora, precisa apenas chamar o objeto e chave ao inves de chamar a funcao.
+const cart = {
+  store: () => {
+    localStorage.setItem('saved', cartItems.innerHTML);
+  },
+  read: () => {
+    cartItems.innerHTML = localStorage.getItem('saved');
+  },
+  empty: () => {
+    cartItems.innerHTML = null;
+    localStorage.removeItem('saved');
+  },
+};
+
 function cartItemClickListener(event) {
   // coloque seu código aqui
   event.target.remove(); // remove o item do dom
+  cart.store(); // salva o carrinho
 }
+
+// funcoes de local storage: (essas funcoes foram movidas para o objeto cart acima)
+/* const storeCart = () => {
+  localStorage.setItem('saved', document.querySelector('.cart__items').innerHTML);
+};
+
+const readCart = () => {
+  document.querySelector('.cart__items').innerHTML = localStorage.getItem('saved');
+};
+
+const emptyCart = () => {
+  document.querySelector('.cart__items').innerHTML = null;
+  localStorage.removeItem('saved');
+}; */
 
 function createCartItemElement({
   id: sku,
@@ -42,6 +72,7 @@ async function addToCart(event) {
   const product = await fetch(`${URL}items/${sku}`); // esse await esta esperando a resposta do produto
   const productJson = await product.json(); // essa linha precisa ser executada apos a resposta do produto
   document.querySelector('.cart__items').appendChild(createCartItemElement(productJson)); //
+  cart.store(); // salva o carrinho
 }
 
 function createProductItemElement({
@@ -75,5 +106,10 @@ async function getProducts(QUERY) { // query eh tipo 'o item sendo buscado'
 
 window.onload = async () => { // o window.onload soh eh carregado quando o documento estiver carregado
   items = document.querySelector('.items'); // todos os elementos ja estarao renderizados quando o documento estiver carregado
+  cartItems = document.querySelector('.cart__items');
   await getProducts('computador'); // chamando o produto ao carregar a pagina/ await para esperar ate estar carregado para poder pegar os botoes
+  cart.read(); // lendo o carrinho
+  document.querySelectorAll('.cart__item').forEach((item) => { // para cada elemento do cart esta sendo adicionado um eventListener
+    item.addEventListener('click', cartItemClickListener); // nao pude colocar esta funcao dentro do cart.read por conflito com lint
+  });
 };
