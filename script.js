@@ -34,25 +34,32 @@ const cart = {
   },
 };
 
+// // funcoes de local storage: (essas funcoes foram movidas para o objeto cart acima)
+// const storeCart = () => {
+//   localStorage.setItem('saved', document.querySelector('.cart__items').innerHTML);
+// };
+
+// const readCart = () => {
+//   document.querySelector('.cart__items').innerHTML = localStorage.getItem('saved');
+// };
+
+// const emptyCart = () => {
+//   document.querySelector('.cart__items').innerHTML = null;
+//   localStorage.removeItem('saved');
+// };
+
+function emptyCartItems() { // funcao para limpar o carrinho completamente pelo botao .empty-cart
+  document.querySelector('.empty-cart').addEventListener('click', () => {
+    cartItems.innerHTML = null; // ao clicar, reatribui o valor da variavel cartItems para null, fazendo com q o carrinho fique vazio
+  });
+}
+// adiciona o eventListener para o botao de limpar o cart
+
 function cartItemClickListener(event) {
   // coloque seu código aqui
   event.target.remove(); // remove o item do dom
   cart.store(); // salva o carrinho
 }
-
-// funcoes de local storage: (essas funcoes foram movidas para o objeto cart acima)
-/* const storeCart = () => {
-  localStorage.setItem('saved', document.querySelector('.cart__items').innerHTML);
-};
-
-const readCart = () => {
-  document.querySelector('.cart__items').innerHTML = localStorage.getItem('saved');
-};
-
-const emptyCart = () => {
-  document.querySelector('.cart__items').innerHTML = null;
-  localStorage.removeItem('saved');
-}; */
 
 function createCartItemElement({
   id: sku,
@@ -97,8 +104,10 @@ function createProductItemElement({
 
 // requisito 1
 async function getProducts(QUERY) { // query eh tipo 'o item sendo buscado'
+  // pegar alguem (.item) <p>class</p> = "Loading" innerHTML da section
   const products = await fetch(`${URL}sites/MLB/search?q=${QUERY}`); // pegando o json do produto
   const productsJSON = await products.json();
+  // pegar o mesmo cara e o innerHTML dele = null
   productsJSON.results.forEach((product) => { // loop para cada produto 
     items.appendChild(createProductItemElement(product)); // acessando o items e adicinando .elementos 'product'/ Products eh o array de 'results';
   });
@@ -112,4 +121,10 @@ window.onload = async () => { // o window.onload soh eh carregado quando o docum
   document.querySelectorAll('.cart__item').forEach((item) => { // para cada elemento do cart esta sendo adicionado um eventListener
     item.addEventListener('click', cartItemClickListener); // nao pude colocar esta funcao dentro do cart.read por conflito com lint
   });
+  emptyCartItems(); // chamando a funcao de limpar o carrinho
 };
+
+// 5 pular
+// criar 6 - teste nao vai rodar por completo. TOTAL?
+// texto de loading - async fetch, add cart.empty no botao
+// texto de loading - acrescentar o texto de loading antes do fetch e depois do json
