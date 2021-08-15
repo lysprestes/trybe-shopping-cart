@@ -104,10 +104,10 @@ function createProductItemElement({
 
 // requisito 1
 async function getProducts(QUERY) { // query eh tipo 'o item sendo buscado'
-  // pegar alguem (.item) <p>class</p> = "Loading" innerHTML da section
+  items.innerHTML = '<p class="loading">loading</p>'; // criando um elemento para mostrar que esta carregando
   const products = await fetch(`${URL}sites/MLB/search?q=${QUERY}`); // pegando o json do produto
   const productsJSON = await products.json();
-  // pegar o mesmo cara e o innerHTML dele = null
+  items.innerHTML = null; // limpa o elemento
   productsJSON.results.forEach((product) => { // loop para cada produto 
     items.appendChild(createProductItemElement(product)); // acessando o items e adicinando .elementos 'product'/ Products eh o array de 'results';
   });
@@ -126,5 +126,3 @@ window.onload = async () => { // o window.onload soh eh carregado quando o docum
 
 // 5 pular
 // criar 6 - teste nao vai rodar por completo. TOTAL?
-// texto de loading - async fetch, add cart.empty no botao
-// texto de loading - acrescentar o texto de loading antes do fetch e depois do json
