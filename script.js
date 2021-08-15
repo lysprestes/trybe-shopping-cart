@@ -21,6 +21,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
+  event.target.remove(); // remove o item do dom
 }
 
 function createCartItemElement({
