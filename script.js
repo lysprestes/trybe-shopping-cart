@@ -123,3 +123,53 @@ window.onload = async () => { // o window.onload soh eh carregado quando o docum
   });
   emptyCartItems(); // chamando a funcao de limpar o carrinho
 };
+
+/*
+Para a resolucao deste projeto, utilizei o seguinte passo-a-passo:
+### 1. Crie uma listagem de produtos
+- inicialmente criei uma let item vazia no inicio do documento
+- criei uma funcao async para pegar os produtos atraves do fetch URL e tranasforma-los em json.
+- transformei a url em uma variavel para facilitar a manipulação em outras partes do codigo.
+- o loop forEach esta acessando cada item e adicionando .elementos 'product'. 
+- acessando o elemento items e adicionando child elements a eles.
+- neste appendChild, chama-se entao a funcao createProductItemElement com o product como parametro
+- o products eh o array de 'results';
+- o items esta sendo declarado na funcao de window.onload, selecionando pela classe '.items'
+- a funcao window.onload foi transformada em async para que o documento seja carregado antes de ser executada a funcao.
+
+### 2. Adicione o produto ao carrinho de compras
+- criei uma funcao async para adicionar o produto ao carrinho de compras.
+- foi declarada a const sku e dentro dela chamada-se a funcao getSkuFromProductItem
+- a funcao getSkuFromProductItem esta acessando o elemento que foi clicado e retornando o sku do produto.
+- neste caso, o elemento que foi clicado esta sendo o parentNode do elemento que esta sendo adicionado ao carrinho.
+- o product esta sendo declarado como uma cosntante e sendo acessado a partir da URL
+- o productJson esta pegando o product e transformando em json.
+- seleciona o .cart__intems com o querySelector e adiciona um elemento filho a ele, que sera o productJson.
+- o cartItems esta sendo declarado na funcao de window.onload, selecionando pela classe '.cart__items', para que seja carregado antes de a funcao ser executada.
+
+### 4. Carregue o carrinho de compras através do **LocalStorage** ao iniciar a página
+- inicialmente tinha sido declarado a funcao como uma const e com o localStorage. setItem(key = "saved" que eh a chave para os itens salvos, value = acessando o .cart__items atraves do querySelector) e salvando o innerHTML do elemento.
+- esta funcao esta sendo chamada na funcao window.onload
+- com o localStorage foi dado um removeItem para remover os itens "saved"
+- inicialmente eu havia criado uma funcao para limpar o carrinho de compras como uma const
+- como haviam mais funcoes com localStorage, decidi adiciona-las a um objeto
+- sendo assim, a partir de agora, estas funcoes podem ser envocadas com "objeto.chave" em qualquer lugar do codigo.
+- em conjunto com o requisito 3 e 4, resolvi colocar estas funcoes values de chaves em um objeto. 
+- neste objeto estao as segundas funcoes:
+  - **removeItem**: remove o item do localStorage
+  - **clear**: limpa todos os itens do localStorage
+  - **read**: lê todos os itens do localStorage
+- estas funcoes a partir de agora podem ser acessadas como objeto.chave em qualquer local do codigo e diversas vezes.
+
+### 3. Remova o item do carrinho de compras ao clicar nele
+- na funcao cartItemClickListener, estou pegando o target e removendo com remove()
+- apos isso, a funcao-obj cart.store() eh chamada para atualizar o carrinho de compras sem o item removido.
+
+### 6. Crie um botão para limpar carrinho de compras
+- criei uma funcao emptyCartItems onde acessa o botao .empty-cart e adiciona um eventListener
+- quando clicado no botao o cartItems atualiza o valor pra null
+
+### 7. Adicione um texto de "loading" durante uma requisição à API
+- criei uma funcao async para adicionar atraves do uso de innerHTMl um paragrafo com a classe e texto "loading" antes do fetch da URL
+- apos a requisição ser feita, este elemento innerHTML tem seu valor atualizado para null.
+*/
