@@ -22,13 +22,13 @@ function getSkuFromProductItem(item) {
 
 // criando um objeto com as funcoes de local storage. A partir de agora, precisa apenas chamar o objeto e chave ao inves de chamar a funcao.
 const cart = {
-  store: () => {
+  store: () => { // funcao para salvar o carrinho
     localStorage.setItem('saved', cartItems.innerHTML);
   },
-  read: () => {
+  read: () => { // funcao para ler o carrinho
     cartItems.innerHTML = localStorage.getItem('saved');
   },
-  empty: () => {
+  empty: () => { // funcao para limpar o carrinho
     cartItems.innerHTML = null;
     localStorage.removeItem('saved');
   },
@@ -61,7 +61,7 @@ function cartItemClickListener(event) {
   cart.store(); // salva o carrinho
 }
 
-function createCartItemElement({
+function createCartItemElement({ // adicionando chaves ao objeto
   id: sku,
   title: name,
   price: salePrice,
@@ -78,7 +78,7 @@ async function addToCart(event) {
   const sku = getSkuFromProductItem(event.target.parentNode); // armazenando o sku do item cujo botao add for clicado
   const product = await fetch(`${URL}items/${sku}`); // esse await esta esperando a resposta do produto
   const productJson = await product.json(); // essa linha precisa ser executada apos a resposta do produto
-  document.querySelector('.cart__items').appendChild(createCartItemElement(productJson)); //
+  document.querySelector('.cart__items').appendChild(createCartItemElement(productJson)); // criando um filho de '.cart__items' que sera o Json do produto
   cart.store(); // salva o carrinho
 }
 
@@ -123,6 +123,3 @@ window.onload = async () => { // o window.onload soh eh carregado quando o docum
   });
   emptyCartItems(); // chamando a funcao de limpar o carrinho
 };
-
-// 5 pular
-// criar 6 - teste nao vai rodar por completo. TOTAL?
