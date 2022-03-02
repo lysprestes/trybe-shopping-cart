@@ -1,4 +1,4 @@
-<h1 align="center">Sd 0x Project Shopping Cart</h1>
+<h1 align="center">Project Shopping Cart</h1>
 
 ## Habilidades
 Nesse projeto, você será capaz de:
